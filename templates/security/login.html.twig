@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body{
+            background-image: url({{ asset('assets/img/eau.jpg') }});
+            background-size: cover;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+        <h1 id="se_connecter">Se connecter</h1>
+        <hr>
+
+        <form method="post" class="row  justify-content-center">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <div class="col-3">
+                <label for="inputEmail" class="mail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" placeholder="Adresse email" id="inputEmail" class="form-control mb-3 rounded-pill" autocomplete="email" required autofocus>
+
+            </div>
+            <div></div>
+
+
+            <div class="col-3">
+                <label for="inputPassword" class="mdp">Mot de passe</label>
+                <input type="password" name="password" placeholder="Mot de passe" id="inputPassword" class="form-control rounded-pill" autocomplete="current-password" required>
+            </div>
+
+            <div class="mb-3 oublie">
+                <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié?</a>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <div class="checkbox mb-3 souvenir">
+                <label><input type="checkbox" name="_remember_me">Se souvenir de moi</label>
+            </div>
+            <div class="col-12 mt-3 validate">
+                <button class="btn btn-primary" type="submit">Valider<i class="fa fa-check-circle"></i></button>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

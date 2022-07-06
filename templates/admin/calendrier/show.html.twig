@@ -1,0 +1,24 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}{{ evenement.title }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>
+            {{ evenement.title }}
+            <a href="#"><i class="fa fa-edit"></i></a> </h1>
+        <hr>
+        <p>Debut : {{ evenement.beginAt|date('d-m-Y H:i') }}</p>
+        <p>Fin : {{ evenement.endAt ? evenement.endAt|date('d-m-Y H:i') : 'date de fin non renseignee'}}</p>
+
+        <form action="{{ path('admin_calendrier_event_delete', {id: evenement.id}) }}" method="POST">
+            <input type="hidden" name="_method" value="DELETE"/>
+            <input type="hidden" name="_token" value="{{ csrf_token('deleteevent'~ evenement.id) }}"/>
+
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+    {% endblock %}
+
+
+

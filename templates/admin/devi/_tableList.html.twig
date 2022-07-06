@@ -1,0 +1,37 @@
+<table class="table" id="data">
+    <thead>
+    <tr>
+        <th scope="col">Prenom - Nom</th>
+        <th scope="col">Reçu le</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for devi in devis %}
+        <tr>
+            <td>{{ devi.prenom ~ ' ' ~ devi.nom }}</td>
+            <td>{{ devi.createdAt |date('d-m-Y à H:i') }}</td>
+            <td>
+                <a href="{{ path('admin_devi_edit', {id: devi.id}) }}" class="btn btn-primary"><i
+                            class="fa fa-edit"></i> Modifier</a>
+                <a href="{{ path('admin_devi_detail', {id: devi.id}) }}" class="btn btn-light"><i class="fa fa-eye"></i>
+                    Détails</a>
+                {% if trash_btn is defined and trash_btn == true %}
+                    <a href="{{ path('admin_devi_movetotrash', {id: devi.id}) }}" class="btn btn-success"><i
+                                class="fa fa-undo"></i> Récuperer </a>
+                    <form class="d-inline" method="post" action="{{ path('admin_devi_delete', {'id': devi.id}) }}">
+                        <input type="hidden" name="_method" value="DELETE"><!--force la methode-->
+                        <input type="hidden" name="_token" value="{{ csrf_token('deletedevi' ~ devi.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+                {% else %}
+                    <a href="{{ path('admin_devi_movetotrash', {id: devi.id}) }}" class="btn btn-danger"><i class="fa fa-trash-alt"></i> Corbeille </a>
+                {% endif %}
+            </td>
+        </tr>
+    {% else %}
+        <div class="alert alert-info">Aucune demande de devis n'est disponible</div>
+    {% endfor %}
+    </tbody>
+
+</table>

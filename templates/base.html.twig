@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{%  block title %}{% endblock %}
+    </title>
+    <meta name="description" content="{%  block metadescription %}{%  endblock %}">
+{% include 'includes/_header.html.twig' %}
+    {% block stylesheets %}
+
+    {% endblock %}
+</head>
+<body>
+<div class="container mt-4">
+
+<main>
+    {% include 'includes/_nav.html.twig' %}
+    {% block body %}{% endblock %}
+</main>
+{% include 'includes/_footer.html.twig' %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    {% block scripts %}{% endblock %}
+
+    <script>
+
+        function showConnexionLink(event){
+            let connexionButton = document.querySelector('#connexion')
+            connexionButton.classList.remove('visually-hidden')
+            window.scroll(0, 0);
+        }
+        document.querySelector('#connexionlink').addEventListener('click', showConnexionLink)
+
+
+    </script>
+
+</div>
+</body>
+</html>

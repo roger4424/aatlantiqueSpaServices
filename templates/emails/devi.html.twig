@@ -1,0 +1,10 @@
+<h2>Vous avez reçu une nouvelle demande de devis.</h2>
+<p><strong>Envoyé par : </strong> {{ devi.prenom }} {{ devi.nom }} ({{ devi.email }})</p>
+
+<p>Téléphone:<strong></strong>{{ devi.phone }}</p>
+<p><strong>Type : </strong> {{ devi.type }}</p>
+<p><strong>fichier : </strong><a href="{{ vich_uploader_asset(devi, "devisFile") }}">Télécharger</a></p>
+
+<br> <br>
+
+<p><strong>Date d'intervention proposée:</strong>{{ devi.interventionAt|date('d-m-Y à H:i') }}</p>

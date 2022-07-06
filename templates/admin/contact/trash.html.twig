@@ -1,0 +1,25 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Corbeille demande de contact{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Liste de demande de contact</h1>
+        <hr>
+        {% for message in app.flashes('admin_trash_success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {{ include('admin/contact/_tableList.html.twig') }}
+
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(() => {
+            $('#data').DataTable({
+                "order": [[1, "desc"]]
+            });
+        });
+    </script>
+{% endblock %}

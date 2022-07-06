@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ path('main_home') }}">
+            <img src="{{ asset('assets/img/logo.png') }}" alt="logo" height="36">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page is defined and 'home' in active_page %}active{% endif %}
+" aria-current="page" href="#page_presentation" title="Presentation">Présentation</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#page_services" title="Services">Nos services</a></li>
+                <li class="nav-item"><a class="nav-link {% if active_page is defined and 'devi' in active_page %}active{% endif %}" href="{{ path('main_devis') }}"><i class="fa fa-handshake"></i>Devis</a></li>
+
+                <!-- <li><a class="nav-link" href="#" title="Avis">Avis</a></li>-->
+              <!--  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Devis
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item {% if active_page is defined and 'devi' in active_page %}active{% endif %}" href="{{ path('main_devis') }}">de</a></li>
+                        <li><a class="dropdown-item" href="#">Entretien</a></li>
+                        <li><a class="dropdown-item" href="#">S.A.V.</a></li>
+                    </ul>
+                </li>-->
+                <li class="nav-item"><a class="nav-link {% if active_page is defined and 'contact' in active_page %}active{% endif %}" href="{{ path('main_contact') }}" title="Contact"><i class="fa fa-address-card"></i>Nous contacter</a></li>
+{#                <li><a class="nav-link" href="{{ path('main_test') }}" title="Test">test</a></li>#}
+
+
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('admin_main') }}" title="Contact"><i class="fa fa-user-secret"></i> Administration </a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}" title="Contact"><i class="fa fa-sign-out"></i>Deconnexion</a></li>
+                {% else %}
+                    <li class="nav-item visually-hidden" id="connexion">
+                        <a class="nav-link{% if current_page is defined and 'login' in current_page %}active{% endif %}" href="{{ path('app_login') }}"><i class="fa fa-sign-in"></i>connexion</a>
+                    </li>
+                {% endif %}
+
+
+
+            </ul>
+        </div>
+    </div>
+
+</nav>

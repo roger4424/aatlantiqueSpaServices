@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-12 col-md-6">{{ form_row(form.email) }}</div>
+        <div class="col-12 col-md-6">{{ form_row(form.roles) }}</div>
+        <div class="col-12">{{ form_row(form.password) }}</div>
+        <div class="col-12"></div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">Valider</button>
+        </div>
+    </div>
+{{ form_end(form) }}

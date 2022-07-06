@@ -1,0 +1,31 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}modifier la demande de devis{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>modifier demande de devis</h1>
+        <hr>
+
+
+
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-12 md-6 form-floating">{{ form_widget(form.nom) }}{{ form_label(form.nom) }}</div>
+            <div class="col-12 md-6">{{ form_row(form.prenom) }}</div>
+            <div class="col-12 md-6">{{ form_row(form.adresse) }}</div>
+{#            <div class="col-12 md-6">{{ form_row(form.zipcode) }}</div>#}
+{#            <div class="col-12 md-6">{{ form_row(form.ville) }}</div>#}
+            <div class="col-12 md-6">{{ form_row(form.email) }}</div>
+            <div class="col-12 md-6">{{ form_row(form.phone) }}</div>
+{#            <div class="col-12 md-6">{{ form_row(form.message) }}</div>#}
+            <div class="col-12 md-6">{{ form_row(form.devisFile) }}</div>
+{#            <div class="col-12 md-6">{{ form_row(form.complement) }}</div>#}
+            <div class="col-12 mt-3"><button type="submit" class="btn btn-primary">valider<i class="fa fa-check-circle"></i></button> </div>
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
+

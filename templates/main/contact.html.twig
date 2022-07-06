@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+        <style>
+                body{
+                        background-image: url({{ asset('assets/img/eau.jpg') }});
+                        background-size: cover;
+                }
+        </style>
+{% endblock %}
+
+
+{% block title %} Contact {% endblock %}
+
+{% block body %}
+        <div class="container mt-4">
+                <h1 id="nous_contacter">Nous contacter</h1>
+                <hr>
+
+                {% for message in app.flashes('contact_success') %}
+                        <div class="alert alert-success col-3">{{ message }}</div>
+                {% endfor %}
+
+                {{ form_start(form) }}
+                <div class="row  justify-content-center">
+{#                        <div class="col-6 md-6 form-floating">{{ form_widget(form.nom) }}{{ form_label(form.nom) }}</div>#}
+
+                        <div class="col-3 md-6">{{ form_row(form.nom) }}</div>
+                        <div class="col-3 md-6">{{ form_row(form.prenom) }}</div>
+                        <div></div>
+                        <div class="col-3 md-6">{{ form_row(form.adresse) }}</div>
+                        <div class="col-3 md-6">{{ form_row(form.zipcode) }}</div>
+                        <div></div>
+                        <div class="col-3 md-6">{{ form_row(form.ville) }}</div>
+                        <div class="col-3 md-6">{{ form_row(form.email) }}</div>
+                        <div></div>
+                        <div class="col-3 md-6">{{ form_row(form.phone) }}</div>
+                        <div></div>
+                        <div class="col-6 md-6">{{ form_row(form.message) }}</div>
+                        <div></div>
+                        <div class="col-6 md-6">{{ form_row(form.complement) }}</div>
+                        <div class="col-12 justify-content-center d-flex">{{ form_row(form.champ_condition) }}</div>
+                        <div class="col-12 mt-3 validate"><button type="submit" class="btn btn-primary">Valider<i class="fa fa-check-circle"></i></button></div>
+
+
+
+
+
+                </div>
+
+                {{ form_end(form) }}
+
+        </div>
+
+{% endblock %}
+

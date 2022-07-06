@@ -1,0 +1,28 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Demande numero {{ devi.id }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Demande de devis numero {{ devi.id }}</h1>
+        <hr>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Prénom: {{ devi.prenom }}</strong></p>
+                <p><strong>Nom: {{ devi.nom }}</strong></p>
+                <p><strong>Email: {{ devi.email }}</strong></p>
+                <p><strong>Telephone: {{ devi.phone }}</strong></p>
+                <p><strong>Adresse: {{ devi.adresse }}</strong></p>
+{#                <p><strong>Ville:{{ devi.zipcode }}{{ devi.ville }}</strong></p>#}
+                <br>
+{#                <p><strong>Message:</strong></p>#}
+{#                <p><strong>{{ devi.message|nl2br }}</strong></p>#}
+{#                <p><strong>Compléments:</strong></p>#}
+{#                <p>{{ devi.complement }}</p>#}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

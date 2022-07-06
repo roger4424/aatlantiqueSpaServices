@@ -1,0 +1,34 @@
+<table class="table" id="data">
+    <thead>
+    <tr>
+        <th scope="col">Prenom - Nom</th>
+        <th scope="col">Reçu le</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.prenom ~ ' ' ~ contact.nom }}</td>
+            <td>{{ contact.createdAt |date('d-m-Y à H:i') }}</td>
+            <td>
+                <a href="{{ path('admin_contact_edit', {id: contact.id}) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                <a href="{{ path('admin_contact_detail', {id: contact.id}) }}" class="btn btn-light" ><i class="fa fa-eye"></i> Détails</a>
+                {% if trash_btn is defined and trash_btn == true %}
+                    <a href="{{ path('admin_contact_movetotrash', {id: contact.id}) }}" class="btn btn-success" ><i class="fa fa-undo"></i> Récuperer </a>
+                    <form class="d-inline" method="post" action="{{ path('admin_contact_delete', {'id': contact.id}) }}">
+                        <input type="hidden" name="_method" value="DELETE"><!--force la methode-->
+                        <input type="hidden" name="_token" value="{{ csrf_token('deletecontact' ~ contact.id) }}">
+                        <button class="btn btn-danger">Supprimer</button></form>
+                {% else %}
+                <a href="{{ path('admin_contact_movetotrash', {id: contact.id}) }}" class="btn btn-danger" ><i class="fa fa-trash-alt"></i> corbeille </a>
+                {% endif %}
+            </td>
+
+        </tr>
+    {% else %}
+        <div class="alert alert-info">Aucune demande de contact n'est disponible</div>
+    {% endfor %}
+    </tbody>
+
+</table>

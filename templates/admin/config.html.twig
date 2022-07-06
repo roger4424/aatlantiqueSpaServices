@@ -1,0 +1,30 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Configuration
+{% endblock %}
+
+
+{% block body %}
+	<div class=" container mt-4">
+		<h1>Configuration</h1>
+		<hr>
+
+		{% for message in app.flashes('config_success')%}
+			<div class="alert alert-success">{{ message }}</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+		<div class="row">
+			<div class="col-12 col-md-6">{{ form_row(form.prenom) }}</div>
+			<div class="col-12 col-md-6">{{ form_row(form.nom) }}</div>
+			<div class="col-12 col-md-6">{{ form_row(form.mail) }}</div>
+			<div class="col-12 col-md-6">{{ form_row(form.telephone) }}</div>
+			<div class="col-12">
+				<button type="submit" class="btn btn-success">Valider</button>
+			</div>
+		</div>
+		{{ form_end(form) }}
+
+	</div>
+
+{% endblock %}

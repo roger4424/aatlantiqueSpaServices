@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{%  block metadescription %}
+    Atlantique spa ....
+{% endblock %}
+
+{% block body %}
+    <section id="page_accueil position-relative">
+        <img src="{{ asset('assets/img/spa.jpg') }}" alt="spa" style="width:100%;">
+        <div class="centered"><h1 id="text">Installation<br />Entretien<br />S.A.V.<br />de spa toutes marques</h1></div>
+    </section>
+    <div class="bandeau"><p class="num_bandeau">Nous contacter: 0606060606</p></div>
+    <section id="page_presentation">
+        <div class="heading">
+            <h2 id="presentation">présentation</h2>
+        </div>
+        <div class="textPresentation">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem alias esse dolorem
+            deleniti odit
+            fugit illum, incidunt excepturi atque sunt officia consequatur, fugiat perspiciatis deserunt laudantium
+            harum praesentium distinctio molestiae.Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem alias
+            esse dolorem deleniti odit fugit illum, incidunt excepturi atque sunt officia consequatur, fugiat
+            perspiciatis deserunt laudantium harum praesentium distinctio molestiae.Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Rem alias esse dolorem deleniti odit fugit illum, incidunt excepturi atque
+            sunt officia consequatur, fugiat perspiciatis deserunt laudantium harum praesentium distinctio
+            molestiae.Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem alias esse dolorem deleniti odit
+            fugit illum, incidunt excepturi atque sunt officia consequatur, fugiat perspiciatis deserunt laudantium
+            harum praesentium distinctio molestiae.</div>
+    </section>
+
+    <!-- nos services -->
+
+    <section id="page_services">
+        <div class="heading">
+            <h2 id="services">nos services</h2>
+        </div>
+        <div class="container text-center" id="temoignage">
+
+            <div class='row'>
+                <div class="col-12 col-lg-4 temoignage1">
+                    <img src="{{ asset('assets/img/picto entretien.png') }}" class="rounded-circle"
+                         style="width:140px;height:140px" />
+                    <h3 class="title_option">Entretien</h3>
+                    <p class="option_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam atque harum perspiciatis
+                        deleniti mollitia fugiat quidem perferendis,
+                        ratione nostrum ex, eum dolore eius quas explicabo alias repellat. Impedit, itaque.
+                    </p>
+                </div>
+                <div class="col-12 col-lg-4 temoignage2">
+                    <img src="{{ asset('assets/img/picto Instal.png') }}" class="rounded-circle"
+                         style="width:140px;height:140px" />
+                    <h3 class="title_option">Installation</h3>
+                    <p class="option_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam atque harum perspiciatis
+                        deleniti mollitia fugiat quidem perferendis,
+                        ratione nostrum ex, eum dolore eius quas explicabo alias repellat. Impedit, itaque.
+                    </p>
+                </div>
+                <div class="col-12 col-lg-4 temoignage3">
+                    <img src="{{ asset('assets/img/picto sav.png') }}" class="rounded-circle"
+                         style="width:140px;height:140px" />
+                    <h3 class="title_option">S.A.V.</h3>
+                    <p class="option_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ullam atque harum perspiciatis
+                        deleniti mollitia fugiat quidem perferendis,
+                        ratione nostrum ex, eum dolore eius quas explicabo alias repellat. Impedit, itaque.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- telephone-->
+
+    <section class="telephone cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+        <img src="{{ asset('assets/img/phone.svg') }}" alt="phone" id="tel">
+    </section>
+
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Être rappelé</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id="rappel">
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <label for="name" class="form-label">Nom</label>
+                                <input aria-label="name" type="text" class="form-control" name="nom" required/>
+                            </div>
+                            <div></div>
+                            <div class="col-12 mt-2">
+                                <label for="tel" class="form-label">Téléphone</label>
+                                <input aria-label="tel" type="tel" class="form-control" name="phone" required/>
+                            </div>
+                            <div></div>
+                            <div class="col-12 mt-2 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success">Etre rappelé?</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+{#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{%  block scripts %}
+    <script>
+        //permet utilisation await et gerer les communications
+        async function handleForm(e){
+            e.preventDefault()
+            let formElement = e.target
+            let rappelForm = new FormData(formElement)
+
+            await axios.post('{{ path('api_rappel') }}', rappelForm)
+            .then(response => {
+                console.log(response.data)
+                alert(response.data.message)
+            }).catch(error=> {
+                if(error.response.data){
+                    let  errorMessage = error.response.data.message
+                    alert(errorMessage)
+                }else {
+                    console.warn(e)
+                }
+                }).finally(()=>{
+                    formElement.reset()
+                })
+
+        }
+
+        document.querySelector('#rappel').addEventListener('submit', handleForm)
+    </script>
+
+
+
+
+
+{% endblock %}
+
+{% block title %}{{ parent() }}| Home{% endblock %}

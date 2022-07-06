@@ -1,0 +1,16 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Creer un nouvel utilisateur{% endblock %}
+
+
+{% block body %}
+    <div class="container mt-4">
+
+        <h1>Creer utilisateur</h1>
+        <hr>
+        {{ include('admin/user/_form.html.twig') }}
+    </div>
+
+{% endblock %}
+
+

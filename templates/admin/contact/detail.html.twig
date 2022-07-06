@@ -1,0 +1,41 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Demande numero {{ contact.id }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Demande de contact numero {{ contact.id }}</h1>
+    <hr>
+    <div class="card">
+        <div class="card-body">
+        <p><strong>Prénom: {{ contact.prenom }}</strong></p>
+        <p><strong>Nom: {{ contact.nom }}</strong></p>
+        <p><strong>Email: {{ contact.email }}</strong></p>
+        <p><strong>Telephone: {{ contact.phone }}</strong></p>
+        <p><strong>Adresse: {{ contact.adresse }}</strong></p>
+        <p><strong>Ville: {{ contact.zipcode }}{{ contact.ville }}</strong></p>
+        <br>
+        <p><strong>Message:</strong></p>
+        <p><strong>{{ contact.message|nl2br }}</strong></p>
+        <p><strong>Compléments:</strong></p>
+        <p>{{ contact.complement }}</p>
+    </div>
+
+    </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <h2>Devis liés:</h2>
+        </div>
+        {% for devi in contact.devis %}
+            <div class="col-12 col-md-3">
+                <div class="card-body">
+                    <p><a href="{{ path('admin_devi_detail', {'id': devi.id}) }}">{{ devi.prenom~' '~devi.nom~' #'~devi.id }}</a></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+

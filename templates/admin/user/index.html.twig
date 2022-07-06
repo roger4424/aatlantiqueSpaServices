@@ -1,0 +1,50 @@
+{%  extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{%  block body %}
+    <div class="container mt-4 ">
+        <h1>Liste des utilisateurs</h1>
+        <hr>
+
+        <a href="{{ path('admin_users_create') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+
+       <div class="d-flex justify-content-end">
+           {{ form_start(searchForm, {'attr':{'style':'display: inherit;'}}) }}
+            {{ form_row(searchForm.search) }}
+           <button type="submit" class="btn btn-primary">Rechercher</button>
+           {{ form_end(searchForm) }}
+       </div>
+
+
+        <table class="table mt-2">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email}}</td>
+                <td>
+                    <a href="{{ path('admin_users_edit', {id: user.id}) }}" class="btn btn-primary">Modifier</a>
+                </td>
+            </tr>
+                {% else %}
+                    <tr>
+                        <td>
+                            <div class="alert alert-info">Aucun utilisateur disponible
+                                <a href="{{ path('admin_users_list') }}">Annuler la recherche</a></div>
+                        </td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

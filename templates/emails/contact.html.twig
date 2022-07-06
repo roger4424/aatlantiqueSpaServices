@@ -1,0 +1,15 @@
+
+// config email
+
+<h2>Vous avez reçu une nouvelle demande de contact.</h2>
+<p><strong>Envoyé par :</strong> {{ contact.prenom }} {{ contact.nom }} ({{ contact.email }})</p>
+<p>Telephone:<strong></strong>{{ contact.phone }}</p>
+<p><strong>Ville : </strong> {{ contact.ville }} ({{ contact.zipcode }}</p>
+
+<br> <br>
+
+<p><strong>Contenu du message</strong></p>  <br>
+<p>{{ contact.message }}</p>
+<br>
+<p><strong>Complément :</strong></p> <br>
+<p>{{ contact.complement }}</p>

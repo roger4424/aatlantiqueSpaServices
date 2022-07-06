@@ -1,0 +1,70 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Demande de devis {% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Liste de demande de devis</h1>
+        <hr>
+        {% for message in app.flashes('admin_devi_success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+       <p class="d-flex justify-content-end">
+           <a href="{{ path('admin_devi_trash') }}" class="text-decoration-none">Accéder à la corbeille</a>
+
+           <a href="{{ path('admin_devi_clear') }}" class="text-danger text-decoration-none" onclick="return confirm('Etes-vous sur?')"><i class="fa fa-trash"></i>Vider toutes les demandes</a></p>
+
+        <table class="table" id="devi">
+            <thead>
+            <tr>
+                <th scope="col">Prenom - Nom</th>
+                <th scope="col">Reçu le</th>
+                <th scope="col">Etat de l'intervention</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for devi in devis %}
+                <tr>
+                    <td>{{ devi.prenom ~ ' ' ~ devi.nom }}</td>
+                    <td>{{ devi.createdAt |date('d-m-Y à H:i') }}</td>
+                    <td>{{ devi.isInterventionValidated ? 'Validé' : 'En attente' }}</td>
+                    <td>
+                        <a href="{{ path('admin_devi_edit', {id: devi.id}) }}" class="btn btn-primary"><i class="fa fa-edit"></i> Modifier</a>
+                        <a href="{{ path('admin_devi_detail', {id: devi.id}) }}" class="btn btn-light" ><i class="fa fa-eye"></i> Détails</a>
+                        <a href="{{ path('admin_devi_movetotrash', {id: devi.id}) }}" class="btn btn-danger" ><i class="fa fa-trash-alt"></i> Corbeille</a>
+
+                        <form action="{{ path('admin_devis_edit_intervention', {id: devi.id}) }}" method="POST" class="d-inline">
+                            <input type="hidden" name="_token" value="{{ csrf_token('edit_intervention_statut' ~ devi.id) }}">
+                            <input type="hidden" name="_method" value="PUT">
+                            {% if devi.isInterventionValidated %}
+                                <button type="submit" class="btn btn-warning">Mettre en attente</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-success">Valider</button>
+
+                            {% endif %}
+                        </form>
+
+
+                    </td>
+
+                </tr>
+            {% else %}
+                <div class="alert alert-info">Aucune demande de devis n'est disponible</div>
+            {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $(document).ready(() => {
+            $('#devi').DataTable({
+                "order": [[1, "desc"]]
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block title %}Demande de contact{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Liste de demande de contact</h1>
+        <hr>
+        {% for message in app.flashes('admin_contact_success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        <p class="d-flex justify-content-end">
+            <a href="{{ path('admin_contact_trash') }}" class="text-decoration-none">Accéder à la corbeille</a>
+            <a href="{{ path('admin_contact_clear') }}" class="text-danger text-decoration-none" onclick="return confirm('Etes-vous sur?')"><i class="fa fa-trash"></i>Vider toutes les demandes</a></p>
+
+        {{ include('admin/contact/_tableList.html.twig') }}
+
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+    $(document).ready(() => {
+        $('#data').DataTable({
+                "order": [[1, "desc"]]
+        });
+    });
+    </script>
+{% endblock %}
